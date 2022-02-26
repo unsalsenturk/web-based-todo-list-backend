@@ -21,7 +21,7 @@ func (db *Database) GetTodoList() (*models.DataResponse, error) {
 	return &db.todoList, nil
 }
 func (db *Database) AddTodoList(todo string) (*models.Todo, error) {
-	v, ok := db.todoList[todo]
+	_, ok := db.todoList[todo]
 	if !ok {
 		db.todoList[todo] = models.Todo{
 			ID:          uint(len(db.todoList)) + 1,
