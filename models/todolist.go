@@ -6,3 +6,7 @@ type Todo struct {
 }
 
 type DataResponse map[string]Todo
+
+type PostTodoListBody struct {
+	Todo string `json:"todo"`
+}
