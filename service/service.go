@@ -23,7 +23,7 @@ func (svc *Service) GetTodoList() (*models.DataResponse, error) {
 }
 
 func (svc *Service) AddTodoList(todo string) (*models.Todo, error) {
-	res, err := svc.AddTodoList(todo)
+	res, err := svc.db.AddTodoList(todo)
 	if err != nil {
 		return nil, err
 	}
