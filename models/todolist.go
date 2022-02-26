@@ -5,4 +5,4 @@ type Todo struct {
 	Description string `json:"description"`
 }
 
-type DataResponse map[int]Todo
+type DataResponse map[string]Todo
