@@ -16,21 +16,23 @@ func TestDatabase_GetTodoList(t *testing.T) {
 		fields fields
 		want   *models.DataResponse
 	}{
-		{name: "when the todolist is in memory then get all",
+		{
+			name: "when the todolist is in memory then get all",
 			fields: fields{todolist: models.DataResponse{
-				1: models.Todo{
+				"Dummy todo": models.Todo{
 					ID:          1,
 					Description: "Dummy todo",
 				},
 			}},
 			want: &models.DataResponse{
-				1: models.Todo{
+				"Dummy todo": models.Todo{
 					ID:          1,
 					Description: "Dummy todo",
 				},
 			},
 		},
-		{name: "when the todolist is not in memory then get all",
+		{
+			name:   "when the todolist is not in memory then get all",
 			fields: fields{todolist: models.DataResponse{}},
 			want:   nil,
 		},
@@ -46,5 +48,56 @@ func TestDatabase_GetTodoList(t *testing.T) {
 			assert.Equal(t, tt.want, res)
 		})
 
+	}
+}
+
+func TestDatabase_AddTodoList(t *testing.T) {
+	type fields struct {
+		todolist models.DataResponse
+	}
+	type args struct {
+		todo string
+	}
+
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   *models.DataResponse
+	}{
+		{
+			name: "when to do list is added successfully",
+			fields: fields{todolist: models.DataResponse{
+				"Dummy todo": models.Todo{
+					ID:          1,
+					Description: "Dummy todo",
+				},
+			}},
+			args: args{todo: "Dummy todo 2"},
+			want: &models.DataResponse{
+				"Dummy todo 2": models.Todo{
+					ID:          2,
+					Description: "Dummy todo 2",
+				},
+			},
+		},
+		{
+			name: "when adding to the to-do list fails.",
+			fields: fields{todolist: models.DataResponse{
+				"Dummy todo": models.Todo{
+					ID:          1,
+					Description: "Dummy todo",
+				},
+			}},
+			args: args{todo: "Dummy todo"},
+			want: nil,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			db := NewDatabase(tt.fields.todolist)
+
+		})
 	}
 }
