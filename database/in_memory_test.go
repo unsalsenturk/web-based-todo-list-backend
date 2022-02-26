@@ -63,7 +63,7 @@ func TestDatabase_AddTodoList(t *testing.T) {
 		name   string
 		fields fields
 		args   args
-		want   *models.DataResponse
+		want   *models.Todo
 	}{
 		{
 			name: "when to do list is added successfully",
@@ -74,11 +74,9 @@ func TestDatabase_AddTodoList(t *testing.T) {
 				},
 			}},
 			args: args{todo: "Dummy todo 2"},
-			want: &models.DataResponse{
-				"Dummy todo 2": models.Todo{
-					ID:          2,
-					Description: "Dummy todo 2",
-				},
+			want: &models.Todo{
+				ID:          2,
+				Description: "Dummy todo 2",
 			},
 		},
 		{
@@ -97,6 +95,11 @@ func TestDatabase_AddTodoList(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			db := NewDatabase(tt.fields.todolist)
+			res, err := db.AddTodoList(tt.args.todo)
+			if err != nil {
+				assert.EqualError(t, err, "database Error : todo already exist")
+			}
+			assert.Equal(t, tt.want, res)
 
 		})
 	}
