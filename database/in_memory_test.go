@@ -1,6 +1,7 @@
 package database
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 	"web-based-todo-list-backend/models"
 )
@@ -37,8 +38,12 @@ func TestDatabase_GetTodoList(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// need database
-
+			db := NewDatabase(tt.fields.todolist)
+			res, err := db.GetTodoList()
+			if err != nil {
+				assert.EqualError(t, err, "database Error : db is null")
+			}
+			assert.Equal(t, tt.want, res)
 		})
 
 	}
