@@ -7,6 +7,7 @@ import (
 
 type IDatabase interface {
 	GetTodoList() (*models.DataResponse, error)
+	AddTodoList(todo string) (*models.Todo, error)
 }
 
 type Database struct {
@@ -18,6 +19,19 @@ func (db *Database) GetTodoList() (*models.DataResponse, error) {
 		return nil, fmt.Errorf("database Error : db is null")
 	}
 	return &db.todoList, nil
+}
+func (db *Database) AddTodoList(todo string) (*models.Todo, error) {
+	v, ok := db.todoList[todo]
+	if !ok {
+		db.todoList[todo] = models.Todo{
+			ID:          uint(len(db.todoList)) + 1,
+			Description: todo,
+		}
+		v := db.todoList[todo]
+		return &v, nil
+	} else {
+		return nil, fmt.Errorf("database Error : todo already exist")
+	}
 }
 
 func NewDatabase(todoList models.DataResponse) IDatabase {
