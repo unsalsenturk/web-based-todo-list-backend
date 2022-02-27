@@ -4,21 +4,11 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"web-based-todo-list-backend/controller"
+	"web-based-todo-list-backend/database"
+	"web-based-todo-list-backend/models"
+	"web-based-todo-list-backend/service"
 )
-
-type Todo struct {
-	ID          uint   `json:"id" `
-	Description string `json:"description"`
-}
-
-func getTodoList(c *gin.Context) {
-
-	var todolist = []Todo{
-		{ID: 1, Description: "Dummy"},
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": todolist})
-}
 
 func main() {
 
@@ -26,10 +16,15 @@ func main() {
 	var router = gin.New()
 	router.Use(corsMiddleware())
 
+	in_memory := make(models.DataResponse)
+	db := database.NewDatabase(in_memory)
+	svc := service.NewService(db)
+	handler := controller.NewTodoListController(svc)
+
 	v1 := router.Group("api/v1")
 	{
-		v1.GET("todolist", getTodoList)
-		//v1.POST("todolist")
+		v1.GET("todolist", handler.GetTodoList)
+		v1.POST("todolist", handler.AddTodoList)
 	}
 
 	srv := &http.Server{
