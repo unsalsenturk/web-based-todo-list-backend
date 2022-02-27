@@ -42,9 +42,9 @@ func (ctl *Controller) AddTodoList(c *gin.Context) {
 			return
 		}
 	}
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusCreated, res)
 }
 
-func newTodoListController(service service.IService) IController {
+func NewTodoListController(service service.IService) IController {
 	return &Controller{svc: service}
 }
