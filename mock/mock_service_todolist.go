@@ -50,10 +50,10 @@ func (mr *MockIServiceMockRecorder) AddTodoList(todo interface{}) *gomock.Call {
 }
 
 // GetTodoList mocks base method.
-func (m *MockIService) GetTodoList() (*models.DataResponse, error) {
+func (m *MockIService) GetTodoList() (*models.ServiceResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTodoList")
-	ret0, _ := ret[0].(*models.DataResponse)
+	ret0, _ := ret[0].(*models.ServiceResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

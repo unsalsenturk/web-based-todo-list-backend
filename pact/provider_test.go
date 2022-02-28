@@ -18,8 +18,8 @@ func TestProvider(t *testing.T) {
 	svr := server.NewServer()
 
 	args := "buy some egg"
-	serviceReturnGetTodoList := &models.DataResponse{
-		"buy some milk": models.Todo{
+	serviceReturnGetTodoList := &models.ServiceResponse{
+		models.Todo{
 			ID:          1,
 			Description: "buy some milk",
 		},

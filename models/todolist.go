@@ -10,3 +10,5 @@ type DataResponse map[string]Todo
 type PostTodoListBody struct {
 	Todo string `json:"todo"`
 }
+
+type ServiceResponse []Todo

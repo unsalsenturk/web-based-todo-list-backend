@@ -14,7 +14,13 @@ func TestService_GetTodoList(t *testing.T) {
 		databaseReturn := &models.DataResponse{
 			"dummy todo": models.Todo{
 				ID:          1,
-				Description: "dummy todo",
+				Description: "buy some milk",
+			},
+		}
+		serviceReturnGetTodoList := &models.ServiceResponse{
+			models.Todo{
+				ID:          1,
+				Description: "buy some milk",
 			},
 		}
 		ctl := gomock.NewController(t)
@@ -27,7 +33,7 @@ func TestService_GetTodoList(t *testing.T) {
 
 		svc := NewService(mockDb)
 		res, err := svc.GetTodoList()
-		assert.Equal(t, res, databaseReturn)
+		assert.Equal(t, res, serviceReturnGetTodoList)
 		assert.Nil(t, err)
 	})
 	t.Run("when GetTodoList returns error", func(t *testing.T) {

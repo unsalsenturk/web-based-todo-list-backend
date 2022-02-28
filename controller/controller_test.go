@@ -18,8 +18,8 @@ import (
 
 func TestController_GetTodoList(t *testing.T) {
 	t.Run("when GetTodoList service returns data properly", func(t *testing.T) {
-		serviceReturn := &models.DataResponse{
-			"dummy todo": models.Todo{
+		serviceReturn := &models.ServiceResponse{
+			models.Todo{
 				ID:          1,
 				Description: "dummy todo",
 			},
@@ -38,7 +38,7 @@ func TestController_GetTodoList(t *testing.T) {
 		controller := NewTodoListController(mockSvc)
 		controller.GetTodoList(c)
 
-		actual := &models.DataResponse{}
+		actual := &models.ServiceResponse{}
 		json.Unmarshal(w.Body.Bytes(), actual)
 
 		assert.Equal(t, serviceReturn, actual)
