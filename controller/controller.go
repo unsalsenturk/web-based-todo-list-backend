@@ -25,6 +25,7 @@ func (ctl *Controller) GetTodoList(c *gin.Context) {
 			return
 		}
 	}
+
 	c.JSON(http.StatusOK, res)
 }
 
