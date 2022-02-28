@@ -12,7 +12,7 @@ build:
       - GOOS=linux CGO_ENABLED=0 go build -o /web-based-todolist
 
 test:
-  image: golang:1.17-alpine3.15
+  image: golang:latest
   stage: test
   script:
     - go mod download
