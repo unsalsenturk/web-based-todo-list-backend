@@ -16,7 +16,7 @@ func main() {
 	handler := controller.NewTodoListController(svc)
 
 	svr := server.NewServer()
-	err := svr.StartServer(3000, handler)
+	err := svr.StartServer(8081, handler)
 	if err != nil {
 		log.Fatalln(err)
 	}
