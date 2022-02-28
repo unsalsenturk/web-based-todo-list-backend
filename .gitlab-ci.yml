@@ -5,14 +5,11 @@ stages:
   - deploy2test
 
 build:
-    image: golang:1.17-alpine3.15
+    image: golang:latest
     stage: build
     script:
       - go mod download
       - GOOS=linux CGO_ENABLED=0 go build -o /web-based-todolist
-    artifacts:
-      paths:
-        - "/web-based-todolist"
 
 test:
   image: golang:1.17-alpine3.15
