@@ -25,5 +25,12 @@
 
 ![](images/backend_test.gif)
 
+## API URL
+
+GET : http://35.222.60.250/v1/api/todolist
+
+POST : http://35.222.60.250/v1/api/todolist
+with body : { todo : "some buy milk"}
+
 
 
