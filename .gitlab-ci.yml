@@ -3,6 +3,8 @@ stages:
   - test
   - dockerize
   - deploy2test
+  - e2e-acceptence-test
+
 
 build:
     image: golang:latest
@@ -27,7 +29,7 @@ dockerize:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA .
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
 deploy2test:
   stage: deploy2test
@@ -40,6 +42,12 @@ deploy2test:
     - kubectl apply -f ./deployment/backend-secret.yaml
     - kubectl apply -f ./deployment/backend-deployment.yaml
     - kubectl apply -f ./deployment/backend-service.yaml
+
+trigger_pipeline:
+  stage: e2e-acceptence-test
+  script:
+    - 'curl --fail --request POST --form token=3cda03c00901af965a31f7b7cb4e54 --form ref=main "https://gitlab.com/api/v4/projects/34008397/trigger/pipeline"'
+
 
 
     
