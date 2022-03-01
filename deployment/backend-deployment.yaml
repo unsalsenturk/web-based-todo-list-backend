@@ -16,6 +16,6 @@ spec:
         - name: gitlab-registry
       containers:
       - name: backend
-        image: registry.gitlab.com/unsalsenturkk/web-based-todo-list-backend:latest
+        image: registry.gitlab.com/unsalsenturkk/web-based-todo-list-backend:c801ca2a
         ports:
         - containerPort: 8081
