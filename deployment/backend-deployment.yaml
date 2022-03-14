@@ -13,7 +13,7 @@ spec:
         app: backend
     spec:
       imagePullSecrets:
-        - name: gitlab-registry
+        - name: gitlab-registry-backend
       containers:
       - name: backend
         image: registry.gitlab.com/unsalsenturkk/web-based-todo-list-backend:latest
