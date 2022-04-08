@@ -27,9 +27,9 @@
 
 ## API URL
 
-GET : http://35.222.60.250/v1/api/todolist
+GET : http://localhost:3000/v1/api/todolist
 
-POST : http://35.222.60.250/v1/api/todolist
+POST : http://localhost:3000/v1/api/todolist
 with body : { todo : "some buy milk"}
 
 
